@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Poznávačka hmyzu</title>
+<style>
+  :root{--bg:#10151e;--panel:#1a2230;--line:#2c3a50;--acc:#8ac46a;--ink:#eef3fa;--muted:#a9b6c8}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(ellipse at top,#1e2a3e,var(--bg) 60%);color:var(--ink);font-family:'Segoe UI',Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 60px}
+  header{text-align:center;margin-bottom:16px}
+  h1{font-size:clamp(28px,6vw,54px);margin:4px 0 0;color:var(--acc);letter-spacing:1px}
+  .sub{color:var(--muted);font-size:clamp(15px,2.4vw,19px)}
+  .icons{font-size:clamp(26px,5vw,40px);letter-spacing:8px}
+  .player{background:#000;border:3px solid var(--acc);border-radius:12px;overflow:hidden;box-shadow:0 10px 40px #000a}
+  video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .tip{color:var(--muted);text-align:center;margin:8px 0 0;font-size:15px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .box{background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+  .box h2{margin:0 0 10px;color:var(--acc);font-size:22px}
+  .full{grid-column:1/-1}
+  .chap{display:flex;gap:10px;align-items:baseline;width:100%;text-align:left;font:inherit;font-size:17px;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:8px 4px;cursor:pointer}
+  .chap:hover{background:#243048}
+  .chap.now{background:#2c3c58;color:#fff}
+  .chap b{color:var(--acc);min-width:56px;font-variant-numeric:tabular-nums}
+  .skup{margin:10px 0 4px;color:var(--acc);font-weight:800}
+  .druh{font-size:15px;padding:3px 0;border-bottom:1px solid var(--line)}
+  .druh b{color:#fff}
+  .druh span{color:var(--muted)}
+  footer{text-align:center;color:var(--muted);margin-top:28px;font-size:13px}
+  details summary{cursor:pointer;color:var(--acc);font-weight:bold}
+  details ul{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="icons">🦋🐞🐝</div>
+    <h1>POZNÁVAČKA HMYZU</h1>
+    <div class="sub">67 druhů · skutečné fotky · 5 vteřin na odpověď · průvodce Profesor Zrníčko · 19 minut</div>
+  </header>
+
+  <div class="player"><video id="v" src="video/poznavacka-hmyzu.mp4" poster="miniatura.jpg" controls preload="metadata" playsinline></video></div>
+  <p class="tip">📱 Na mobilu otoč telefon na šířku a dej celou obrazovku ⛶ · Při každé fotce zastav video a zkus si odpovědět dřív, než uběhne 5 vteřin!</p>
+
+  <div class="grid">
+    <div class="box ">
+      <h2>🎬 Kapitoly (klikni a video skočí)</h2>
+      <div id="chapters"></div>
+    </div>
+    <div class="box">
+      <h2>📋 Tahák – všechny druhy</h2>
+      <div class="skup">vážky (proměna nedokonalá)</div>
+      <div class="druh"><b>Šídlo</b> <span>– Velké mohutné tělo a oči, které se nahoře dotýkají. Výborný letec.</span></div>
+      <div class="druh"><b>Motýlice</b> <span>– Kovově modrozelená, křídla skládá nad tělem a poletuje jako motýl.</span></div>
+      <div class="druh"><b>Vážka plochá</b> <span>– Široký plochý zadeček, samec je modře ojíněný.</span></div>
+      <div class="druh"><b>Šidélko</b> <span>– Drobné tenké tělo, křídla složená podél zadečku.</span></div>
+      <div class="skup">rovnokřídlí (proměna nedokonalá)</div>
+      <div class="druh"><b>Kobylka zelená</b> <span>– Dlouhá nitkovitá tykadla, samička má šavlovité kladélko. Je masožravá.</span></div>
+      <div class="druh"><b>Saranče vrzavá</b> <span>– Krátká tykadla, býložravá. Vrzá třením nohou o křídla.</span></div>
+      <div class="druh"><b>Saranče stěhovavá</b> <span>– Krátká tykadla, létá v obřích hejnech a je to velký škůdce.</span></div>
+      <div class="druh"><b>Cvrček polní</b> <span>– Černý, žije v norkách na mezích a cvrká třením křídel.</span></div>
+      <div class="druh"><b>Krtonožka obecná</b> <span>– Hrabavé přední nohy jako krtek. Žije v půdě a okusuje kořínky.</span></div>
+      <div class="skup">ploštice (proměna nedokonalá)</div>
+      <div class="druh"><b>Splešťule blátivá</b> <span>– Vodní dravá ploštice s dýchací trubicí na konci zadečku.</span></div>
+      <div class="druh"><b>Znakoplavka obecná</b> <span>– Plave břichem vzhůru a vesluje zadními nohami. Vodní dravec.</span></div>
+      <div class="druh"><b>Jehlanka válcovitá</b> <span>– Úzké válcovité tělo jako klacík. Vodní a dravá.</span></div>
+      <div class="druh"><b>Ruměnice pospolná</b> <span>– Červenočerná, vyhřívá se na slunci v houfech. Býložravá.</span></div>
+      <div class="druh"><b>Bruslařka obecná</b> <span>– Běhá po vodní hladině díky povrchové bláně.</span></div>
+      <div class="druh"><b>Vodoměrka štíhlá</b> <span>– Velmi štíhlá, pomalu kráčí po hladině jako chodec.</span></div>
+      <div class="druh"><b>Kněžice zelná</b> <span>– Ploštice se štítkem na zádech, škůdce zelí. A zapáchá.</span></div>
+      <div class="druh"><b>Štěnice domácí</b> <span>– Bezkřídlá, ploché tělo, v noci saje krev člověka.</span></div>
+      <div class="skup">vši (proměna nedokonalá)</div>
+      <div class="druh"><b>Veš dětská</b> <span>– Bezkřídlá, drápky na nohou, lepí hnidy na vlasy.</span></div>
+      <div class="druh"><b>Veš šatní</b> <span>– Žije v oblečení, saje krev a přenáší nemoci.</span></div>
+      <div class="skup">stejnokřídlí (proměna nedokonalá)</div>
+      <div class="druh"><b>Mšice zelená</b> <span>– Drobná, saje rostlinné šťávy. Střídá partenogenezi s pohlavní generací.</span></div>
+      <div class="druh"><b>Mšice maková</b> <span>– Černá mšice v koloniích na máku a bobu. Škůdce.</span></div>
+      <div class="druh"><b>Cikáda</b> <span>– Robustní tělo, střechovitá křídla. Samci hlasitě cvrčí.</span></div>
+      <div class="druh"><b>Pěnodějka</b> <span>– Její larva se schovává v pěně, které se říká kukaččí sliny.</span></div>
+      <div class="druh"><b>Vlnatka</b> <span>– Pokrytá bílými voskovými vlákny jako vata. Škůdce jabloní.</span></div>
+      <div class="druh"><b>Puklice</b> <span>– Vypadá jako nehybná pukla na větvičce. Saje šťávy, škůdce.</span></div>
+      <div class="druh"><b>Molice</b> <span>– Drobná bílá muška na rubu listů. Škůdce rostlin.</span></div>
+      <div class="skup">síťokřídlí (proměna dokonalá)</div>
+      <div class="druh"><b>Zlatoočka skvrnitá</b> <span>– Zelená, průhledná síťovaná křídla a nápadné zlaté oči. Živí se mšicemi.</span></div>
+      <div class="druh"><b>Mravkolev běžný</b> <span>– Podobný vážce, ale má kyjovitá tykadla. Larva loví v písečné jamce.</span></div>
+      <div class="skup">blanokřídlí (proměna dokonalá)</div>
+      <div class="druh"><b>Pilatka švestková</b> <span>– Širopasá – zadeček přisedlý k hrudi. Škůdce peckovin.</span></div>
+      <div class="druh"><b>Žlabatka duběnková</b> <span>– Vytváří na dubech hálky, kterým se říká duběnky.</span></div>
+      <div class="druh"><b>Lumek velký</b> <span>– Dlouhé kladélko. Klade vajíčka do larev jiného hmyzu.</span></div>
+      <div class="druh"><b>Mravenec lesní</b> <span>– Všežravec, staví mraveniště a je velmi užitečný.</span></div>
+      <div class="druh"><b>Vosa útočná</b> <span>– Žlutočerná, dravá, tvoří jen jednoletá společenstva.</span></div>
+      <div class="druh"><b>Sršeň obecná</b> <span>– Naše největší vosa, hnědožlutá. Dravá, jednoletá společenstva.</span></div>
+      <div class="druh"><b>Čmelák</b> <span>– Huňatý opylovač trubkovitých květů, hnízda staví v půdě.</span></div>
+      <div class="druh"><b>Včela medonosná</b> <span>– Opylovač s trvalým společenstvem: královna, trubci a dělnice.</span></div>
+      <div class="skup">dvoukřídlí (proměna dokonalá)</div>
+      <div class="druh"><b>Komár pisklavý</b> <span>– Larvy žijí ve vodě, samičky sají krev. Druhý pár křídel je kyvadélko.</span></div>
+      <div class="druh"><b>Anofeles čtyřskvrnný</b> <span>– Přenašeč malárie. Při sání sedí šikmo k podložce.</span></div>
+      <div class="druh"><b>Ovád hovězí</b> <span>– Zavalité tělo, krátká tykadla, velké oči. Samička saje krev.</span></div>
+      <div class="druh"><b>Octomilka obecná</b> <span>– Drobná muška s červenýma očima na kvasícím ovoci.</span></div>
+      <div class="druh"><b>Moucha domácí</b> <span>– Šedá s pruhy na hrudi. Přenašeč infekcí.</span></div>
+      <div class="druh"><b>Masařka obecná</b> <span>– Velká šedá s kostkovaným zadečkem. Klade vajíčka do masa.</span></div>
+      <div class="druh"><b>Pestřenka obecná</b> <span>– Napodobuje vosu, ale nebodá. Umí viset na místě ve vzduchu.</span></div>
+      <div class="skup">blechy (proměna dokonalá)</div>
+      <div class="druh"><b>Blecha morová</b> <span>– Přenášela mor. Ze stran zploštělé tělo a silné skákavé nohy.</span></div>
+      <div class="druh"><b>Blecha obecná</b> <span>– Parazituje na člověku, bodavě sací ústrojí, skáče do dálky.</span></div>
+      <div class="skup">brouci (proměna dokonalá)</div>
+      <div class="druh"><b>Svižník polní</b> <span>– Zelený rychlý dravec s bílými skvrnami na krovkách.</span></div>
+      <div class="druh"><b>Střevlík</b> <span>– Velký kovově lesklý dravec, běhá po zemi a nelétá.</span></div>
+      <div class="druh"><b>Potápník vroubený</b> <span>– Vodní dravec se žlutým lemem, zadní nohy jako vesla.</span></div>
+      <div class="druh"><b>Hrobařík obecný</b> <span>– Černý s oranžovými pruhy. Zahrabává mršiny drobných živočichů.</span></div>
+      <div class="druh"><b>Světluška</b> <span>– Samička je bezkřídlá a v noci svítí zelenavým světlem.</span></div>
+      <div class="druh"><b>Kovařík</b> <span>– Podlouhlé tělo. Když leží na zádech, vymrští se a lupne.</span></div>
+      <div class="druh"><b>Chroust obecný</b> <span>– Hnědé krovky a vějířovitá tykadla. Larva je ponrava.</span></div>
+      <div class="druh"><b>Tesařík</b> <span>– Velmi dlouhá tykadla. Larvy se vyvíjejí ve dřevě.</span></div>
+      <div class="druh"><b>Roháč obecný</b> <span>– Samec má kusadla jako jelení parohy. Náš největší brouk.</span></div>
+      <div class="druh"><b>Kůrovec</b> <span>– Drobný brouk, vykusuje chodbičky pod kůrou. Ničí smrkové lesy.</span></div>
+      <div class="skup">motýli (proměna dokonalá)</div>
+      <div class="druh"><b>Bělásek zelný</b> <span>– Bílá křídla s černými špičkami. Housenky žerou zelí.</span></div>
+      <div class="druh"><b>Babočka paví oko</b> <span>– Červená křídla se čtyřmi velkými oky. Denní motýl.</span></div>
+      <div class="druh"><b>Okáč</b> <span>– Hnědý denní motýl s očky na křídlech, létá po loukách.</span></div>
+      <div class="druh"><b>Otakárek fenyklový</b> <span>– Žlutý s černými pruhy a ocásky na zadních křídlech.</span></div>
+      <div class="druh"><b>Jasoň</b> <span>– Bílý horský motýl s průsvitnými křídly. Je chráněný.</span></div>
+      <div class="druh"><b>Dlouhozobka</b> <span>– Lišaj, který saje nektar za letu jako kolibřík.</span></div>
+      <div class="druh"><b>Martináč</b> <span>– Velký noční motýl s oky na křídlech, samec má hřebenitá tykadla.</span></div>
+      <div class="druh"><b>Přástevník medvědí</b> <span>– Pestrý noční motýl. Chlupaté housence se říká medvídek.</span></div>
+      <div class="druh"><b>Píďalka</b> <span>– Její housenka leze zvláštně – jako by měřila píďmi.</span></div>
+      <div class="druh"><b>Obaleč jablečný</b> <span>– Jeho housenka dělá červivá jablka.</span></div>
+      <div class="druh"><b>Mol šatní</b> <span>– Drobný motýlek, larvy okusují vlnu a kožešiny.</span></div>
+      <div class="druh"><b>Bourec morušový</b> <span>– Z jeho zámotku se získává hedvábí. Housenky žerou listy moruše.</span></div>
+    </div>
+
+    <div class="box full" id="kredbox">
+      <details>
+        <summary>📸 Odkud jsou fotky (volné licence)</summary>
+        <ul id="kredity"></ul>
+      </details>
+    </div>
+  </div>
+  <footer>Video vyrobil 🔱 NEPTUN (s pomocí AI Claude). Kresby, hudba i hlas jsou vytvořené počítačem.</footer>
+</div>
+
+<script>
+const CHAPTERS = [[0, "Úvod – co se naučíme"], [46, "1. Vážky (proměna nedokonalá)"], [110, "2. Rovnokřídlí (proměna nedokonalá)"], [193, "3. Ploštice (proměna nedokonalá)"], [319, "4. Vši (proměna nedokonalá)"], [352, "5. Stejnokřídlí (proměna nedokonalá)"], [463, "6. Síťokřídlí (proměna dokonalá)"], [501, "7. Blanokřídlí (proměna dokonalá)"], [628, "8. Dvoukřídlí (proměna dokonalá)"], [741, "9. Blechy (proměna dokonalá)"], [776, "10. Brouci (proměna dokonalá)"], [929, "11. Motýli (proměna dokonalá)"]];
+const KREDITY = ["Aeshna cyanea female 1.jpg - Böhringer böhringer friedrich (CC BY-SA 2.5)", "♂ Gebänderte Prachtlibelle Calopteryx splendens 5.JPG - Feel free to use my photos, but please mention me as the author and if you want send me a message. or (rufre@lenz-nenning.at) (CC BY-SA 3.0 at)", "Thomas Bresson - Libellula depressa-6 (by).jpg - Thomas Bresson (CC BY 2.0)", "Hufeisen-Azurjungfern (Coenagrion puella).jpg - Stephan Sprinz (CC BY 4.0)", "Grüne Heupferd (Tettigonia viridissima) bei der Häutung.jpg - Stephan Sprinz (CC BY 4.0)", "IKAl 20100801 Psophus stridulus.jpg - IKAl (CC BY-SA 3.0)", "Locusta-migratoria-wanderheuschrecke.jpg - Holger Krisp (CC BY 3.0)", "Gryllus campestris MHNT.jpg - Didier Descouens (CC BY-SA 4.0)", "Gryllotalpa gryllotalpa 01.JPG - H. Zell (CC BY-SA 3.0)", "Water scorpion (Nepa cinerea).jpg - Charles J. Sharp (CC BY-SA 4.0)", "Bayerischer Spessart Naturpark, Gemeine Rückenschwimmer (Notonecta glauca).jpg - Thomas Fuhrmann (CC BY-SA 4.0)", "2017.06.11.-23-Anglerteiche-Rimbach--Stabwanze-Weibchen bei Eiablage.jpg - Andreas Eichler (CC BY-SA 4.0)", "Pyrrhocoris apterus (Kowale bezskrzydłe).JPG - Lestat (Jan Mehlich) (CC BY-SA 3.0)", "Pond skaters (Gerris lacustris).jpg - Charles J. Sharp (CC BY-SA 4.0)", "Hydrometra stagnorum01.jpg -  (Attribution)", "Bed bug, Cimex lectularius.jpg - Content Providers(s): CDC/ Harvard University, Dr. Gary Alpert; Dr. Harold Harlan; Richard Pollack. Photo Credit: Piotr Naskrecki (Public domain)", "Male human head louse.jpg - Gilles San Martin (CC BY-SA 2.0)", "Pediculus humanus capitis CDC9217.png - CDC/ Dr. Dennis D. Juranek (Public domain)", "Green peach aphid (Myzus persicae) on a stem, Lisbon, Portugal (approx. GPS location) julesvernex2.jpg - Jules Verne Times Two (CC BY-SA 4.0)", "Cicadetta montana.jpg - Laisverobotams (Public domain)", "Личинка белокрылки.jpg - Anatoly Mikhaltsov (CC BY-SA 4.0)", "Chrysopidae 01 (MK).jpg - Mathias Krumbholz (CC BY-SA 3.0)", "Myrmeleon formicarius head Bytom.jpg - Gower (CC BY-SA 4.0)", "Galappel (Cynips quercusfolii) 25-12-2024. (d.j.b).jpg - Dominicus Johannes Bergsma. (CC BY-SA 4.0)", "A Formica rufa sideview.jpg - Richard Bartz, Munich Makro Freak (CC BY-SA 2.5)", "Vespa crabro head 01.jpg - H. Zell (CC BY-SA 3.0)", "Bombus terrestris queen - Tilia cordata - Keila.jpg - Ivar Leidus (CC BY-SA 4.0)", "Apis mellifera - Melilotus albus - Keila.jpg - Ivar Leidus (CC BY-SA 4.0)", "Tabanus bovinus - closeup.jpg - Rude (CC BY-SA 3.0)", "Minettia fly.jpg - Ermell (CC BY-SA 4.0)", "Copulating flies.jpg - Tomascastelazo (CC BY-SA 3.0)", "Sarcophaga carnaria, Sète 05.jpg - Christian Ferrer (CC BY-SA 4.0)", "Berteroa incana - Syrphus ribesii - Tallinn.jpg - Ivar Leidus (CC BY-SA 4.0)", "Carabe doré recto-verso.jpg - Didier Descouens (CC BY 4.0)", "Dytiscus marginalis 01 by-dpckk.jpg - Dytiscus_marginalis_01_by-dpc.jpg: David Perez derivative work: B kimmel (talk) (CC BY 3.0)", "(MHNT) Lampyris noctiluca (female).jpg - Didier Descouens (CC BY-SA 4.0)", "Athous haemorrhoidalis.JPG - Cyberdemon007 (talk) (Public domain)", "Melolontha melolontha global MHNT.jpg - Didier Descouens (CC BY-SA 4.0)", "Cerambyx cerdo (couple).jpg - Didier Descouens (CC BY 3.0)", "Lucanus cervus Femelle MHNT.jpg - Didier Descouens (CC BY-SA 4.0)", "Ips typographus (female).jpg - Gilles San Martin (CC BY-SA 2.0)", "Pieris brassicae auf Centaurea jacea 01.jpg - Uoaei1 (CC BY-SA 4.0)", "Inachis io Lill-Jansskogen.JPG - Korall (CC BY-SA 3.0)", "Große Ochsenauge, Maniola jurtina, mating.JPG - Böhringer Friedrich (CC BY-SA 2.5)", "Papilio machaon Mitterbach 01.jpg - Uoaei1 (CC BY-SA 4.0)", "Parnassius mnemosyne - Dumanlı apollo 12.jpg - Zeynel Cebeci (CC BY-SA 4.0)", "Macroglossum stellatarum01(js).jpg - Jerzy Strzelecki (CC BY-SA 3.0)", "Saturnia pavonia caterpillar (top view) - Niitvälja bog.jpg - Ivar Leidus (CC BY-SA 4.0)", "(MHNT) Arctia caja caja - Ciechanow Poland - male dorsal.jpg - Didier Descouens (CC BY-SA 4.0)", "Magpie moth (Abraxas grossulariata).jpg - Charles J. Sharp (CC BY-SA 4.0)", "Портрет комнатной моли.jpg - Gribkov (CC BY 4.0)", "Giant silk moth (Adelowalkeria tristygma).jpg - Charles J. Sharp (CC BY-SA 4.0)", "(MHNT) Philaenus spumarius.jpg - Didier Descouens (CC BY-SA 4.0)", "NHMUK010177265 The plague flea - Xenopsylla cheopis cheopis (Rothschild, 1903).jpg - Olha Schedrina / The Natural History Museum (CC BY 4.0)", "Cydia pomonella trap 2012-06-05.jpg - Slaunger (CC BY-SA 3.0)", "Culex pipiens 2007-1.jpg - Alvesgaspar (CC BY-SA 3.0)", "Vespula germanica Richard Bartz.jpg - Richard Bartz, Munich aka Makro Freak (CC BY-SA 2.5)", "Nuttall et Shipley 1901 Anopheles maculipennis.jpg - E. Wilson, Cambridge (Public domain)", "Cicindela campestris Bytom.jpg - Adrian Tync (CC BY-SA 4.0)", "Клоп рапсовый (Eurydema oleracea).jpg - It\u0027snotpeople\u0027sfault (CC BY-SA 4.0)", "Aphis fabae STEREO, 0050x.JPG - SecretDisc (CC BY-SA 3.0)", "Parthenolecanium corni Акациевая ложнощитовка - 5777514899.jpg - Flowersabc (CC BY-SA 2.0)", "Rhyssa persuasoria, Parc de Woluwe, Bruxelles (52907246407).jpg - Frank Vassen from Brussels, Belgium (CC BY 2.0)", "PulexIrritans.jpg - Herms, William Brodbeck (1876-1949) (Public domain)", "Eriosoma lanigerum 1.JPG - Stok (CC BY-SA 4.0)", "Hoplocampa alpina.jpg - John Lyden (CC BY 4.0)", "Nicrophorus vespillo - Gemeiner Totengräber mit Poecilochirus carabi.jpg - 5snake5 (CC0)", "Tettigonia viridissima - female.jpg - Samuel Švehla (CC BY-SA 4.0)", "Gryllotalpa gryllotalpa MHNT.jpg - Didier Descouens (CC BY-SA 4.0)", "Aphis fabae colony on Yucca filamentosa in Dnipro by baby-bear.org.jpg 02.jpg - Natalka Ukraine (baby-bear.org) (CC BY 4.0)", "Lyristes plebejus3.jpg - Jodelet / Lépinay (CC BY-SA 2.0 fr)", "Pro Huerta - Cucurbita maxima var. zapallito - Trialeurodes vaporariorum 01 adults.jpg - Pablo Oliveri (Pro Huerta) (CC BY-SA 2.5)", "Anopheles albimanus mosquito.jpg - Photo Credit: James Gathany Content Providers(s): CDC (Public domain)", "Woolly Aphids.jpg - Sanjay Acharya (CC BY-SA 4.0)", "Culex pipiens, Puppe.jpg - Danny S. (CC BY-SA 4.0)", "Musca domestica September 2007-1.jpg - Alvesgaspar (CC BY-SA 3.0)", "Nicrophorus vespilloides.jpg - Avustfel (CC BY-SA 4.0)", "Agriotes lineatus prothorax2.png - Dimitǎr Boevski and Reitter/Siga (CC BY 4.0)", "Lucanus cervus male 2017 G1.jpg - George Chernilevsky (Public domain)", "Saturnia pavonia MHNT CUT 2011 0 439 male Les piles - Cornille (Dordogne).jpg - Didier Descouens (CC BY-SA 4.0)", "Cydia pomonella. Codling Moth (38585044561).jpg - gailhampshire from Cradley, Malvern, U.K (CC BY 2.0)", "Adult Moth of Bombyx mori.jpg - LuffyNamiZoro (CC0)", "Culex quinquefasciatus Insects.jpg - Tanvir Rahat (CC BY-SA 4.0)", "Click beetle (Semiotus distinctus).jpg - Charles J. Sharp (CC BY-SA 4.0)", "Tineola bisselliella - Common clothes moth - Моль платяная (39446568840).jpg - Ilia Ustyantsev from Russia (CC BY-SA 2.0)", "Gewächshaus-Weiße Fliege Trialeurodes vaporariorum 5226.jpg - NobbiP (CC BY-SA 3.0)"];
+const v = document.getElementById('v');
+const zvukZap = () => { v.muted = false; v.defaultMuted = false; v.removeAttribute('muted'); if (v.volume < 0.05) v.volume = 1; };
+zvukZap(); v.addEventListener('loadedmetadata', zvukZap); v.addEventListener('play', zvukZap);
+const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+const box = document.getElementById('chapters');
+CHAPTERS.forEach(([t, name]) => {
+  const b = document.createElement('button'); b.className = 'chap'; b.dataset.t = t;
+  b.innerHTML = '<b>' + fmt(t) + '</b><span></span>'; b.children[1].textContent = name;
+  b.onclick = () => { const go = () => { zvukZap(); v.currentTime = t; v.play().catch(() => {}); }; if (v.readyState >= 1) go(); else { v.addEventListener('loadedmetadata', go, { once: true }); v.load(); } v.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  box.appendChild(b);
+});
+v.addEventListener('timeupdate', () => { let cur = null; document.querySelectorAll('.chap').forEach(b => { b.classList.remove('now'); if (+b.dataset.t <= v.currentTime) cur = b; }); if (cur) cur.classList.add('now'); });
+if (!KREDITY.length) document.getElementById('kredbox').remove();
+else { const ul = document.getElementById('kredity'); KREDITY.forEach(k => { const li = document.createElement('li'); li.textContent = k; ul.appendChild(li); }); }
+</script>
+</body>
+</html>
